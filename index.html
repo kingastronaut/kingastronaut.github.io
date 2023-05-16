@@ -13,6 +13,9 @@
     <div id="player"></div>
     <p id="current-time"></p>
     <p id="ending-time"></p>
+	<input type="range" id="end-time" name="end-time" min="0" max="15" value="15">
+	<button id="play-button">Play Selected Time Span</button>
+	<p id="slider-time"></p>
     <script>
       // Initialize the player object
 
@@ -20,32 +23,14 @@
      
       // Function to update the current time display
 	  
-	//  function clearBox(elementID)
-	//{
-	//	document.getElementById(elementID).innerHTML = "";
-	//}
-	
       function updateCurrentTime() {
         const seconds = player.getCurrentTime();
-		//var date = new Date(null);
-		//date.setSeconds(seconds);
-		//var hhmmssFormat = date.toISOString().substr(11,8);
-		//var mmssFormat = date.toISOString().substring(14,19);
-
-
 		
-		//same for ending time 
 		const endSeconds = Number(document.querySelector("#end-time").value);
 		var dateEnd = new Date(null);
 		dateEnd.setSeconds(endSeconds + seconds);
-		//var hhmmssFormatEnd = dateEnd.toISOString().substr(11,8);
-		//var mmssFormatEnd = dateEnd.toISOString().substring(14,19); 
-		//var hhmmssFormatEnd = new Date(endSeconds * 1000).toISOString().substring(11, 16)
-		//var mmssFormatEnd = new Date(endSeconds * 1000).toISOString().substring(14, 19);
 
 
-		
-		
 		if (seconds > 3600){
 			var hhmmssFormat = new Date(seconds * 1000).toISOString().substring(11, 19);
 			document.querySelector("#current-time").innerHTML = "Current Time: " + hhmmssFormat;
@@ -96,23 +81,35 @@
           }
         });
 		} else {
-			//let link2 = document.getElementById("player");
-			//link2.src = "https://www.youtube.com/embed/" + videoId;
-			//link2.events = {
-            //"onReady": () => {
-            //  setInterval(updateCurrentTime, 150);
 			player.loadVideoById({videoId: videoId, startSeconds:0});
             }
           });
+		  
+		  
+		  
+		 // HERE FOR STARTSTOP BUTTON
 		
-		;
+		document.querySelector("#play-button").addEventListener("click", (event) => {
+			event.preventDefault();
+			
+			 // Get the YouTube link
+			const link = document.querySelector("#link").value;
+        
+			// Extract the video ID from the link
+			const videoId = link.split("v=")[1];
+			
+			//create link with timestamps and play the range
+			const videoStartSeconds = player.getCurrentTime();
+			const videoEndSeconds = Number(document.querySelector("#end-time").value) + videoStartSeconds;
+			var videoIdRange = videoId + "?start=" + Math.floor(videoStartSeconds) + "&end=" + Math.floor(videoEndSeconds);
+			//player.loadVideoById({videoId: videoIdRange});
+			document.querySelector("#play-button").innerHTML = videoIdRange;
+		});
     </script>
-	<input type="range" id="end-time" name="end-time" min="0" max="100" value="100">
-<button id="play-button">Play Selected Time Span</button>
-<p id="slider-time"></p>
 
 
-<script>
+
+<!--script>
       const form = document.querySelector('form');
       const videoDiv = document.querySelector('#video');
       const currentTimeValue = updateCurrentTime();
@@ -134,7 +131,7 @@
         const videoIframe = document.querySelector('#video-iframe');
         videoIframe.src = `${embedLink}?start=${startTime}&end=${endTime}`;
       });
-    </script>
+    </script-->
     
     <!-- Load the YouTube IFrame API -->
     <script src="https://www.youtube.com/iframe_api"></script>
