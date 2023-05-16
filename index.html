@@ -20,6 +20,7 @@
       // Initialize the player object
 
       let player;
+	  let timestamps;
      
       // Function to update the current time display
 	  
@@ -82,6 +83,7 @@
         });
 		} else {
 			player.loadVideoById({videoId: videoId, startSeconds:0});
+			//player.playVideo();
             }
           });
 		  
@@ -93,46 +95,29 @@
 			event.preventDefault();
 			
 			 // Get the YouTube link
-			const link = document.querySelector("#link").value;
+			const link2 = document.querySelector("#link").value;
         
 			// Extract the video ID from the link
-			const videoId = link.split("v=")[1];
+			const videoId2 = link2.split("v=")[1];
 			
 			//create link with timestamps and play the range
 			const videoStartSeconds = player.getCurrentTime();
 			const videoEndSeconds = Number(document.querySelector("#end-time").value) + videoStartSeconds;
-			var videoIdRange = videoId + "?start=" + Math.floor(videoStartSeconds) + "&end=" + Math.floor(videoEndSeconds);
-			//player.loadVideoById({videoId: videoIdRange});
-			document.querySelector("#play-button").innerHTML = videoIdRange;
+			const videoIdRange = videoId2 + "?start=" + Math.floor(videoStartSeconds) + "&end=" + Math.floor(videoEndSeconds);
+			
+			if (typeof timestamps != 'object'){
+				timestamps = {
+				start: Math.floor(videoStartSeconds),
+				end: Math.floor(videoEndSeconds)}
+				//var startT = Math.floor(videoStartSeconds);
+				//var endT = Math.floor(videoEndSeconds);
+			};
+			
+			
+			player.loadVideoById({videoId: videoId2, startSeconds:timestamps["start"], endSeconds: timestamps["end"]});
+
 		});
     </script>
 
-
-
-<!--script>
-      const form = document.querySelector('form');
-      const videoDiv = document.querySelector('#video');
-      const currentTimeValue = updateCurrentTime();
-      const endTimeSlider = document.querySelector('#end-time');
-      const playButton = document.querySelector('#play-button');
-      let embedLink = '';
-      let videoId = '';
-      form.addEventListener('submit', (event) => {
-        event.preventDefault();
-        const link = document.querySelector('#link').value;
-        videoId = link.split('v=')[1];
-        embedLink = `https://www.youtube.com/embed/${videoId}`;
-        videoDiv.innerHTML = `<iframe id="video-iframe" width="560" height="315" src="${embedLink}" frameborder="0" allowfullscreen></iframe>`;
-      });
-      
-	  playButton.addEventListener('click', () => {
-        const startTime = updateCurrentTime();
-        const endTime = updateCurrentTime() + endTimeSlider.value;
-        const videoIframe = document.querySelector('#video-iframe');
-        videoIframe.src = `${embedLink}?start=${startTime}&end=${endTime}`;
-      });
-    </script-->
-    
-    <!-- Load the YouTube IFrame API -->
     <script src="https://www.youtube.com/iframe_api"></script>
   </body>
