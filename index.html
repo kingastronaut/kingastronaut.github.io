@@ -15,9 +15,16 @@
     <p id="ending-time"></p>
     <script>
       // Initialize the player object
+
       let player;
-      
+     
       // Function to update the current time display
+	  
+	//  function clearBox(elementID)
+	//{
+	//	document.getElementById(elementID).innerHTML = "";
+	//}
+	
       function updateCurrentTime() {
         const seconds = player.getCurrentTime();
 		var date = new Date(null);
@@ -26,7 +33,7 @@
 		var mmssFormat = date.toISOString().substring(14,19); 
 		
 		//same for ending time 
-		const endSeconds = document.querySelector("#end-time").value;
+		var endSeconds = document.querySelector("#end-time").value;
 		var dateEnd = new Date(null);
 		dateEnd.setSeconds(endSeconds + seconds);
 		var hhmmssFormatEnd = dateEnd.toISOString().substr(11,8);
@@ -35,38 +42,56 @@
 		
 		if (seconds > 3600){
 			document.querySelector("#current-time").innerHTML = "Current Time: " + hhmmssFormat;
-			document.querySelector("#ending-time").innerHTML = "End Time: " + hhmmssFormatEnd;
 		} else {
 			document.querySelector("#current-time").innerHTML = "Current Time: " + mmssFormat;
+		}
+		
+		if (endSeconds > 3600){
+			document.querySelector("#ending-time").innerHTML = "End Time: " + hhmmssFormatEnd;
+		} else {
 			document.querySelector("#ending-time").innerHTML = "End Time: " + mmssFormatEnd;
 		}
-		//const time = player.getCurrentTime();
-        //document.querySelector("#current-time").innerHTML = "Current Time: " + time.toFixed(0);
+
       }
       
       // Listen for form submission event
       document.querySelector("form").addEventListener("submit", (event) => {
         event.preventDefault();
         
+	//	clearBox("player");
+		
         // Get the YouTube link
         const link = document.querySelector("#link").value;
         
         // Extract the video ID from the link
         const videoId = link.split("v=")[1];
         
-        // Create the player object
-        player = new YT.Player("player", {
+		
+        // Create the player object if it does not exist, otherwise update existing
+
+		if (typeof player != 'object'){
+		player = new YT.Player("player", {
           height: "360",
           width: "640",
           videoId: videoId,
           events: {
             "onReady": () => {
               // Set an interval to update the current time display every second
-              setInterval(updateCurrentTime, 1000);
+              setInterval(updateCurrentTime, 150);
             }
           }
         });
-      });
+		} else {
+			//let link2 = document.getElementById("player");
+			//link2.src = "https://www.youtube.com/embed/" + videoId;
+			//link2.events = {
+            //"onReady": () => {
+            //  setInterval(updateCurrentTime, 150);
+			player.loadVideoById({videoId: videoId, startSeconds:0});
+            }
+          });
+		
+		;
     </script>
 	<input type="range" id="end-time" name="end-time" min="0" max="100" value="100">
 <button id="play-button">Play Selected Time Span</button>
@@ -86,7 +111,8 @@
         embedLink = `https://www.youtube.com/embed/${videoId}`;
         videoDiv.innerHTML = `<iframe id="video-iframe" width="560" height="315" src="${embedLink}" frameborder="0" allowfullscreen></iframe>`;
       });
-      playButton.addEventListener('click', () => {
+      
+	  playButton.addEventListener('click', () => {
         const startTime = updateCurrentTime();
         const endTime = updateCurrentTime() + endTimeSlider.value;
         const videoIframe = document.querySelector('#video-iframe');
