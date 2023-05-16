@@ -27,30 +27,44 @@
 	
       function updateCurrentTime() {
         const seconds = player.getCurrentTime();
-		var date = new Date(null);
-		date.setSeconds(seconds);
-		var hhmmssFormat = date.toISOString().substr(11,8);
-		var mmssFormat = date.toISOString().substring(14,19); 
+		//var date = new Date(null);
+		//date.setSeconds(seconds);
+		//var hhmmssFormat = date.toISOString().substr(11,8);
+		//var mmssFormat = date.toISOString().substring(14,19);
+
+
 		
 		//same for ending time 
-		var endSeconds = document.querySelector("#end-time").value;
+		const endSeconds = Number(document.querySelector("#end-time").value);
 		var dateEnd = new Date(null);
 		dateEnd.setSeconds(endSeconds + seconds);
-		var hhmmssFormatEnd = dateEnd.toISOString().substr(11,8);
-		var mmssFormatEnd = dateEnd.toISOString().substring(14,19); 
+		//var hhmmssFormatEnd = dateEnd.toISOString().substr(11,8);
+		//var mmssFormatEnd = dateEnd.toISOString().substring(14,19); 
+		//var hhmmssFormatEnd = new Date(endSeconds * 1000).toISOString().substring(11, 16)
+		//var mmssFormatEnd = new Date(endSeconds * 1000).toISOString().substring(14, 19);
+
+
 		
 		
 		if (seconds > 3600){
+			var hhmmssFormat = new Date(seconds * 1000).toISOString().substring(11, 19);
 			document.querySelector("#current-time").innerHTML = "Current Time: " + hhmmssFormat;
 		} else {
+			var mmssFormat = new Date(seconds * 1000).toISOString().substring(14, 19);
 			document.querySelector("#current-time").innerHTML = "Current Time: " + mmssFormat;
 		}
 		
-		if (endSeconds > 3600){
+		if (seconds + endSeconds > 3600){
+			var hhmmssFormatEnd = dateEnd.toISOString().substr(11,8);
 			document.querySelector("#ending-time").innerHTML = "End Time: " + hhmmssFormatEnd;
 		} else {
+			var mmssFormatEnd = dateEnd.toISOString().substring(14,19); 
 			document.querySelector("#ending-time").innerHTML = "End Time: " + mmssFormatEnd;
 		}
+		
+		//move this later!! To listen to range event
+		document.querySelector("#slider-time").innerHTML = "Clip length: " + endSeconds + " seconds.";
+
 
       }
       
@@ -95,6 +109,8 @@
     </script>
 	<input type="range" id="end-time" name="end-time" min="0" max="100" value="100">
 <button id="play-button">Play Selected Time Span</button>
+<p id="slider-time"></p>
+
 
 <script>
       const form = document.querySelector('form');
