@@ -5,6 +5,15 @@ div.container {
 	
 }
 
+h1 {
+	text-align: center;
+	
+}
+
+.separator {
+	height: 0.2vh;
+}
+
 button {
 	
 }
@@ -13,3 +22,37 @@ input {
 	
 }
 
+.a {
+	text-align: center;
+	width: 100%;
+	
+}
+
+#end-time {
+	width: 60%;
+	
+}
+
+#play-button{
+	width: 20%;
+	
+}
+
+#reset-button{
+	width: 10%;
+	
+}
+
+iframe {
+	width: 80vw;
+	height: 45vw;
+}
+
+#slider-time {
+	text-align: center;
+}
+
+#link {
+	width: 60%;
+	
+}
