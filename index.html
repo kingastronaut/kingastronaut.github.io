@@ -19,6 +19,7 @@
 	<button id="reset-button" onclick="fReset()">Reset range</button>
 	</div>
 	<p id="slider-time"></p>
+
     <script>
 	
 	
@@ -78,7 +79,7 @@
 		  
 		  
 		  
-		 // HERE FOR STARTSTOP BUTTON
+		 // button for playing time range
 		
 		document.querySelector("#play-button").addEventListener("click", (event) => {
 			event.preventDefault();
@@ -96,24 +97,26 @@
 			
 			if (timestamps["start"] == 0 && timestamps["end"] == 0){
 				timestamps = {
-				start: Math.floor(videoStartSeconds),
-				end: Math.floor(videoEndSeconds)}
+				start: videoStartSeconds,
+				end: videoEndSeconds}
 				
 				if (timestamps["end"] > 3600){
-				var startT = new Date(timestamps["start"] * 1000).toISOString().substring(11, 19);
-				var endT = new Date(timestamps["end"] * 1000).toISOString().substring(11, 19);
+				var startT = new Date(Math.floor(timestamps["start"]) * 1000).toISOString().substring(11, 19);
+				var endT = new Date(Math.floor(timestamps["end"]) * 1000).toISOString().substring(11, 19);
 				} else {
-				var startT = new Date(timestamps["start"] * 1000).toISOString().substring(14,19);
-				var endT = new Date(timestamps["end"] * 1000).toISOString().substring(14,19);
+				var startT = new Date(Math.floor(timestamps["start"]) * 1000).toISOString().substring(14,19);
+				var endT = new Date(Math.floor(timestamps["end"]) * 1000).toISOString().substring(14,19);
 				}
 				document.getElementById("resetDIV").hidden = false;
 				document.querySelector("#play-button").innerHTML = "Play: " + startT + " - " + endT;
 			};
 			
 			
-			player.loadVideoById({videoId: videoId2, startSeconds:timestamps["start"], endSeconds: timestamps["end"]});
+			player.loadVideoById({videoId: videoId2, startSeconds:timestamps["start"] - 0.6, endSeconds: timestamps["end"]});
 
 		});
+		
+		// reset button
 		
 		function fReset(){
 			document.querySelector("#play-button").innerHTML = "Play Selected Time Span";
@@ -123,6 +126,12 @@
 			document.getElementById("resetDIV").hidden = true;
 		}
 		
+		
+		//recording buttons
+		
+
+		
+
     </script>
 
     <script src="https://www.youtube.com/iframe_api"></script>
