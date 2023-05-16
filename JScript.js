@@ -1,30 +1,4 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>YouTube Video with Current Time Display</title>
-	<link rel="stylesheet" href="style.css">
-  </head>
-  <body>
-  <div class="container">
-    <h1>Enter a YouTube Link</h1>
-    <form>
-      <label for="link">YouTube Link:</label>
-      <input type="text" id="link" name="link">
-      <button type="submit">Embed</button>
-    </form>
-    <div id="player"></div>
-    <p id="current-time"></p>
-    <p id="ending-time"></p>
-	<input type="range" id="end-time" name="end-time" min="0" max="15" value="15">
-	<button id="play-button">Play Selected Time Span</button>
-	<!--div id="resetDIV" hidden -->
-	<button id="reset-button" onclick="fReset()" hidden>Reset range</button>
-	<!-- /div -->
-	<p id="slider-time"></p>
-	</div>
 
-    <!-- script>
-	
 	
 	
       // Initialize the player object
@@ -144,26 +118,3 @@
 		
 
 		
-
-    </script -->
-    <script src="JScript.js"></script>
-    <script src="https://www.youtube.com/iframe_api"></script>
-  
-  
-  
-  <!-- 
-  Ideas for future: 
-  - buttons for +/- 0.1 s to range
-  - help section to the bottom
-  - include possibility for use with mobile links (...
-	var link0 = "https://youtu.be/vymeTZkiKD0" (mobile link)
-	var link1 = "https://www.youtube.com/watch?v=vymeTZkiKD0" (desktop link)
-  - recording possibility
-  
-  -->
-  
-  
-  
-  
-  
-  </body>
