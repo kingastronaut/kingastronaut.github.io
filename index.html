@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>YouTube Video with Current Time Display</title>
+  </head>
+  <body>
+    <h1>Enter a YouTube Link</h1>
+    <form>
+      <label for="link">YouTube Link:</label>
+      <input type="text" id="link" name="link">
+      <button type="submit">Embed</button>
+    </form>
+    <div id="player"></div>
+    <p id="current-time"></p>
+    
+    <script>
+      // Initialize the player object
+      let player;
+      
+      // Function to update the current time display
+      function updateCurrentTime() {
+        const time = player.getCurrentTime();
+        document.querySelector("#current-time").innerHTML = "Current Time: " + time.toFixed(2);
+	return time.toFixed(2);
+      }
+      
+      // Listen for form submission event
+      document.querySelector("form").addEventListener("submit", (event) => {
+        event.preventDefault();
+        
+        // Get the YouTube link
+        const link = document.querySelector("#link").value;
+        
+        // Extract the video ID from the link
+        const videoId = link.split("v=")[1];
+        
+        // Create the player object
+        player = new YT.Player("player", {
+          height: "360",
+          width: "640",
+          videoId: videoId,
+          events: {
+            "onReady": () => {
+              // Set an interval to update the current time display every second
+              setInterval(updateCurrentTime, 1000);
+            }
+          }
+        });
+      });
+    </script>
+	<input type="range" id="end-time" name="end-time" min="0" max="100" value="100">
+<button id="play-button">Play Selected Time Span</button>
+
+<script>
+      const form = document.querySelector('form');
+      const videoDiv = document.querySelector('#video');
+      const currentTimeValue = updateCurrentTime();
+      const endTimeSlider = document.querySelector('#end-time');
+      const playButton = document.querySelector('#play-button');
+      let embedLink = '';
+      let videoId = '';
+      form.addEventListener('submit', (event) => {
+        event.preventDefault();
+        const link = document.querySelector('#link').value;
+        videoId = link.split('v=')[1];
+        embedLink = `https://www.youtube.com/embed/${videoId}`;
+        videoDiv.innerHTML = `<iframe id="video-iframe" width="560" height="315" src="${embedLink}" frameborder="0" allowfullscreen></iframe>`;
+      });
+      playButton.addEventListener('click', () => {
+        const startTime = updateCurrentTime();
+        const endTime = updateCurrentTime() + endTimeSlider.value;
+        const videoIframe = document.querySelector('#video-iframe');
+        videoIframe.src = `${embedLink}?start=${startTime}&end=${endTime}`;
+      });
+    </script>
+    
+    <!-- Load the YouTube IFrame API -->
+    <script src="https://www.youtube.com/iframe_api"></script>
+  </body>
