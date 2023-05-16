@@ -54,7 +54,12 @@
         const link = document.querySelector("#link").value;
         
         // Extract the video ID from the link
-        const videoId = link.split("v=")[1];
+		
+		if (link.search("v=") != -1) {
+			var videoId = link.split("v=")[1];
+		} else {
+			var videoId = link.split(".be/")[1];
+		}
         
 		
         // Create the player object if it does not exist, otherwise update existing
@@ -73,7 +78,6 @@
         });
 		} else {
 			player.loadVideoById({videoId: videoId, startSeconds:0});
-			//player.playVideo();
             }
           });
 		  
@@ -88,7 +92,13 @@
 			const link2 = document.querySelector("#link").value;
         
 			// Extract the video ID from the link
-			const videoId2 = link2.split("v=")[1];
+			
+			if (link2.search("v=") != -1) {
+				var videoId2 = link2.split("v=")[1];
+			} else {
+				var videoId2 = link2.split(".be/")[1];
+		}
+			//const videoId2 = link2.split("v=")[1];
 			
 			//create link with timestamps and play the range
 			const videoStartSeconds = player.getCurrentTime();
@@ -135,4 +145,22 @@
     </script>
 
     <script src="https://www.youtube.com/iframe_api"></script>
+  
+  
+  
+  <!-- 
+  Ideas for future: 
+  - buttons for +/- 0.1 s to range
+  - help section to the bottom
+  - include possibility for use with mobile links (...
+	var link0 = "https://youtu.be/vymeTZkiKD0" (mobile link)
+	var link1 = "https://www.youtube.com/watch?v=vymeTZkiKD0" (desktop link)
+  - recording possibility
+  
+  -->
+  
+  
+  
+  
+  
   </body>
