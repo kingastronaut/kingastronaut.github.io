@@ -24,8 +24,7 @@
       // Listen for form submission event
       document.querySelector("form").addEventListener("submit", (event) => {
         event.preventDefault();
-        
-	//	clearBox("player");
+		
 		
         // Get the YouTube link
         const link = document.querySelector("#link").value;
@@ -53,6 +52,7 @@
             }
           }
         });
+		document.getElementById("choose-time").hidden = false;
 		} else {
 			player.loadVideoById({videoId: videoId, startSeconds:0});
             }
@@ -68,7 +68,7 @@
 			 // Get the YouTube link
 			const link2 = document.querySelector("#link").value;
         
-			// Extract the video ID from the link
+			// Extract the video ID from the link (this prob superfluous now)
 			
 			if (link2.search("v=") != -1) {
 				var videoId2 = link2.split("v=")[1];
@@ -106,7 +106,7 @@
 		// reset button
 		
 		function fReset(){
-			document.querySelector("#play-button").innerHTML = "Play Selected Time Span";
+			document.querySelector("#play-button").innerHTML = "Select Time Span";
 			timestamps = {
 				start: 0,
 				end: 0}
