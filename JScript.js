@@ -37,6 +37,10 @@
 			var videoId = link.split(".be/")[1];
 		}
         
+		if (videoId.search("&") != -1) {
+			videoId = videoId.split("&")[0];
+		}
+		
 		
         // Create the player object if it does not exist, otherwise update existing
 
@@ -75,7 +79,10 @@
 			} else {
 				var videoId2 = link2.split(".be/")[1];
 		}
-			//const videoId2 = link2.split("v=")[1];
+		
+		if (videoId2.search("&") != -1) {
+			videoId2 = videoId2.split("&")[0];
+		}
 			
 			//create link with timestamps and play the range
 			const videoStartSeconds = player.getCurrentTime();
