@@ -4,6 +4,7 @@
       // Initialize the player object
 
       let player;
+	  let rangeSelected = false;
 	  let timestamps = {
 	  start: 0,
 	  end: 0
@@ -16,8 +17,9 @@
 		const endSeconds = Number(document.querySelector("#end-time").value);
 		
 		//move this later!! To listen to range event
-		document.querySelector("#slider-time").innerHTML = "Clip length: " + endSeconds + " seconds.";
-
+		if (!rangeSelected){
+		document.querySelector("#play-button").innerHTML = endSeconds + " second(s)";
+		}
 
       }
       
@@ -95,33 +97,118 @@
 				end: videoEndSeconds}
 				
 				if (timestamps["end"] > 3600){
-				var startT = new Date(Math.floor(timestamps["start"]) * 1000).toISOString().substring(11, 19);
-				var endT = new Date(Math.floor(timestamps["end"]) * 1000).toISOString().substring(11, 19);
+				var startT = new Date(timestamps["start"] * 1000).toISOString().substring(11, 19);
+				var endT = new Date(timestamps["end"] * 1000).toISOString().substring(11, 19);
 				} else {
-				var startT = new Date(Math.floor(timestamps["start"]) * 1000).toISOString().substring(14,19);
-				var endT = new Date(Math.floor(timestamps["end"]) * 1000).toISOString().substring(14,19);
+				var startT = new Date(timestamps["start"] * 1000).toISOString().substring(14,19);
+				var endT = new Date(timestamps["end"] * 1000).toISOString().substring(14,19);
 				}
 				document.getElementById("reset-button").hidden = false;
-				document.querySelector("#play-button").innerHTML = "Play: " + startT + " - " + endT;
+				document.getElementById("range-info").hidden = false;
+
+				document.querySelector("#slider-time").innerHTML = "Selected range: " + startT + (Math.round(timestamps["start"]*5)/5%1).toFixed(2).substring(1) + " - " + endT + (Math.round(timestamps["start"]*5)/5%1).toFixed(2).substring(1);
+				rangeSelected = true;
+				document.querySelector("#play-button").innerHTML = "Play range";
+				
 			};
 			
 			
-			player.loadVideoById({videoId: videoId2, startSeconds:timestamps["start"] - 0.6, endSeconds: timestamps["end"]});
+			player.loadVideoById({videoId: videoId2, startSeconds:timestamps["start"], endSeconds: timestamps["end"]});
 
 		});
+		
+		// add or substact 0.2 or 1 second (IN PROGRESS)
+		function SmallUpdateRange(){
+			if (timestamps["end"] > 3600){
+				var startT = new Date(timestamps["start"] * 1000).toISOString().substring(11, 19);
+				var endT = new Date(timestamps["end"] * 1000).toISOString().substring(11, 19);
+				} else {
+				var startT = new Date(timestamps["start"] * 1000).toISOString().substring(14,19);
+				var endT = new Date(timestamps["end"] * 1000).toISOString().substring(14,19);
+				}
+				
+			if (document.querySelector("#link").value.search("v=") != -1) {
+				var videoId2 = document.querySelector("#link").value.split("v=")[1];
+			} else {
+				var videoId2 = document.querySelector("#link").value.split(".be/")[1];
+			}
+			
+			if (videoId2.search("&") != -1) {
+				videoId2 = videoId2.split("&")[0];
+		}			
+			
+			
+			document.querySelector("#slider-time").innerHTML = "Selected range: " + startT + (Math.round(timestamps["start"]*5)/5%1).toFixed(2).substring(1) + " - " + endT + (Math.round(timestamps["end"]*5)/5%1).toFixed(2).substring(1);
+			player.loadVideoById({videoId: videoId2, startSeconds:timestamps["start"], endSeconds: timestamps["end"]});	
+		}
+		
+		
+		function plus02(){
+			timestamps["start"] = timestamps["start"] + 0.2;
+			SmallUpdateRange();
+			}
+			
+		function plus1(){
+			timestamps["start"] = timestamps["start"] + 1;
+			SmallUpdateRange();
+			}
+		
+		function minus02(){
+			timestamps["start"] = timestamps["start"] - 0.2;
+			SmallUpdateRange();
+			}
+		
+		function minus1(){
+			timestamps["start"] = timestamps["start"] - 1;
+			SmallUpdateRange();
+			}
+		
+		function Eplus02(){
+			timestamps["end"] = timestamps["end"] + 0.2;
+			SmallUpdateRange();
+			}
+			
+		function Eplus1(){
+			timestamps["end"] = timestamps["end"] + 1;
+			SmallUpdateRange();
+			}
+		
+		function Eminus02(){
+			timestamps["end"] = timestamps["end"] - 0.2;
+			SmallUpdateRange();
+			}
+		
+		function Eminus1(){
+			timestamps["end"] = timestamps["end"] - 1;
+			SmallUpdateRange();
+			}		
+		
+		
+		
+		
+		
+		
 		
 		// reset button
 		
 		function fReset(){
-			document.querySelector("#play-button").innerHTML = "Select Time Span";
+			//document.querySelector("#play-button").innerHTML = "Select Time Span";
+			rangeSelected = false;
 			timestamps = {
 				start: 0,
 				end: 0}
 			document.getElementById("reset-button").hidden = true;
+			document.getElementById("range-info").hidden = true;
 		}
 		
 		
 		//recording buttons
+		
+	
+
+			
+			
+			
 		
 
 		

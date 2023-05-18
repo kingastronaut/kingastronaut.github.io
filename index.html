@@ -22,11 +22,31 @@
 	<div id="choose-time" hidden>
 	<div  class="a">
 	<input type="range" id="end-time" name="end-time" min="0" max="15" value="15">
-	<button id="play-button">Select Time Span</button>
+	<button id="play-button">Select Range</button>
 	<button id="reset-button" onclick="fReset()" hidden>Reset range</button>
 	</div>
 	<p id="slider-time"></p>
+	<div id="range-info" hidden>
+	<div id="adjust-start">
+	<p>ADJUST START</p>
+	<button class="textClick" id="subtract-1" onclick="minus1()">- 1 sec</button>
+	<button class="textClick" id="subtract-0.2" onclick="minus02()">- 0.2 sec</button>
+	<button class="textClick" id="add-02" onclick="plus02()">+ 0.2 sec</button>
+	<button class="textClick" id="add-1" onclick="plus1()">+ 1 sec</button>
 	</div>
+	<div id="adjust-end">
+<p>ADJUST END</p>
+	<button class="textClick" id="Esubtract-1" onclick="Eminus1()">- 1 sec</button>
+	<button class="textClick" id="Esubtract-02" onclick="Eminus02()">- 0.2 sec</button>
+	<button class="textClick" id="Eadd-02" onclick="Eplus02()">+ 0.2 sec</button>
+	<button class="textClick" id="Eadd-1" onclick="Eplus1()">+ 1 sec</button>
+	</div>
+	</div>
+	</div>
+	<button id="record-button" onclick="recordVoice()" hidden>Record voice</button>
+	
+	<audio id="playback" controls hidden></audio>
+	
 	</div>
 	
     <script src="JScript.js"></script>
@@ -37,11 +57,10 @@
   <!-- 
   Ideas for future: 
   - buttons for +/- 0.2 s to range
+	- eg. resize the decimals (look into: span)
   - help section to the bottom
-  - include possibility for use with mobile links (...
-	var link0 = "https://youtu.be/vymeTZkiKD0" (mobile link)
-	var link1 = "https://www.youtube.com/watch?v=vymeTZkiKD0" (desktop link)
   - recording possibility
+  
   
   -->
   
