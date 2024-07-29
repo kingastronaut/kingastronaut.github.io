@@ -224,6 +224,7 @@ navigator.mediaDevices.getUserMedia({audio:true})
       record.onclick = e => {
         record.disabled = true;
         record.style.backgroundColor = "transparent"
+	record.style.borderWidth = 2;
         stopRecord.disabled=false;
         audioChunks = [];
         rec.start();
@@ -232,6 +233,7 @@ navigator.mediaDevices.getUserMedia({audio:true})
         record.disabled = false;
         stop.disabled=true;
         record.style.backgroundColor = "#ff8080"
+	record.style.borderWidth = 0;
         rec.stop();
         }
 		
