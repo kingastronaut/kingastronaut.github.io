@@ -223,7 +223,7 @@ navigator.mediaDevices.getUserMedia({audio:true})
     function sendData(data) {}
       record.onclick = e => {
         record.disabled = true;
-        record.style.backgroundColor = "blue"
+        record.style.backgroundColor = "#b4d4fa"
         stopRecord.disabled=false;
         audioChunks = [];
         rec.start();
@@ -231,7 +231,7 @@ navigator.mediaDevices.getUserMedia({audio:true})
       stopRecord.onclick = e => {
         record.disabled = false;
         stop.disabled=true;
-        record.style.backgroundColor = "red"
+        record.style.backgroundColor = "#ff8080"
         rec.stop();
         }
 		
