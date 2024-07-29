@@ -118,7 +118,7 @@ p {
 
 }
 
-#record{
+#recordButton{
 	display: inline-block;
 	margin: auto;
 	width: 15%;
@@ -126,7 +126,7 @@ p {
 	padding-left: 2%;
 }
 
-#stopRecord {
+#stopRecordButton {
 	display: inline-block;
 	margin: auto;
 	width: 15%;
