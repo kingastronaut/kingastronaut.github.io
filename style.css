@@ -119,19 +119,25 @@ p {
 }
 
 #record{
-	width: 20%;
+	display: inline-block;
+	margin: auto;
+	width: 10%;
 	padding-right: 2%;
 	padding-left: 2%;
 }
 
 #stopRecord {
-	width: 20%;
+	display: inline-block;
+	margin: auto;
+	width: 10%;
 	padding-right: 2%;
 	padding-left: 2%;
 }
 
 #recordedAudio {
-	width: 50%;
+	display: inline-block;
+	margin: auto;
+	width: 30%;
 }
 
 // override the above for mobile screens:
