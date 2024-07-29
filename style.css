@@ -126,12 +126,20 @@ p {
 	padding-left: 2%;
 }
 
+#record {
+	width: 100%;
+}
+
 #stopRecordButton {
 	display: inline-block;
 	margin: auto;
 	width: 15%;
 	padding-right: 2%;
 	padding-left: 2%;
+}
+
+#stopRecord {
+	width: 100%;
 }
 
 #recordedAudio {
