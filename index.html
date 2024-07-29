@@ -49,59 +49,47 @@
 
 	  <!-- mic? -->
 
-<audio controls autoplay></audio>
-    		<script type="text/javascript" src="recorder.js"> </script>
-                    <fieldset><legend>RECORD AUDIO</legend>
-    		<input onclick="startRecording()" type="button" value="start recording" />
-    		<input onclick="stopRecording()" type="button" value="stop recording and play" />
-                    </fieldset>
-    		<script>
-    			var onFail = function(e) {
-    				console.log('Rejected!', e);
-    			};
+<p>
+    <button type="button" id="record">Record</button>
+    <button type="button" id="stopRecord" disabled>Stop</button>
+  </p>
+  <p>
+    <audio id="recordedAudio"></audio>        
+  </p>
 
-    			var onSuccess = function(s) {
-    				var context = new webkitAudioContext();
-    				var mediaStreamSource = context.createMediaStreamSource(s);
-    				recorder = new Recorder(mediaStreamSource);
-    				recorder.record();
+  <script> 
+    navigator.mediaDevices.getUserMedia({audio:true})
+    .then(stream => {handlerFunction(stream)})
 
-    				// audio loopback
-    				// mediaStreamSource.connect(context.destination);
-    			}
-
-    			window.URL = window.URL || window.webkitURL;
-    			navigator.getUserMedia  = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
-
-    			var recorder;
-    			var audio = document.querySelector('audio');
-
-    			function startRecording() {
-    				if (navigator.getUserMedia) {
-    					navigator.getUserMedia({audio: true}, onSuccess, onFail);
-    				} else {
-    					console.log('navigator.getUserMedia not present');
-    				}
-    			}
-
-    			function stopRecording() {
-    				recorder.stop();
-    				recorder.exportWAV(function(s) {
-                                
-                                 	audio.src = window.URL.createObjectURL(s);
-    				});
-    			}
-    		</script>
-	  
-	</div>
-
-
-
-
-
-	  
-    <script src="JScript.js"></script>
-    <script src="https://www.youtube.com/iframe_api"></script>
+    function handlerFunction(stream) {
+      rec = new MediaRecorder(stream);
+      rec.ondataavailable = e => {
+        audioChunks.push(e.data);
+        if (rec.state == "inactive"){
+          let blob = new Blob(audioChunks,{type:'audio/mp3'});
+          recordedAudio.src = URL.createObjectURL(blob);
+          recordedAudio.controls=true;
+          recordedAudio.autoplay=true;
+          sendData(blob)
+          }
+        }
+      }
+    
+    function sendData(data) {}
+      record.onclick = e => {
+        record.disabled = true;
+        record.style.backgroundColor = "blue"
+        stopRecord.disabled=false;
+        audioChunks = [];
+        rec.start();
+        }
+      stopRecord.onclick = e => {
+        record.disabled = false;
+        stop.disabled=true;
+        record.style.backgroundColor = "red"
+        rec.stop();
+        }
+  </script>
   
   
 
