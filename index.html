@@ -41,55 +41,22 @@
 	<button class="textClick" id="Eadd-02" onclick="Eplus02()">+ 0.2 sec</button>
 	<button class="textClick" id="Eadd-1" onclick="Eplus1()">+ 1 sec</button>
 	</div>
-	</div>
-	
-
 		
-	</div>
-  <!-- mic (https://stackoverflow.com/questions/16413063/html5-record-audio-to-file) -->
-
-<p>
+<!-- mic (https://stackoverflow.com/questions/16413063/html5-record-audio-to-file) -->
+	
+	<p>
     <button type="button" id="record">Record</button>
     <button type="button" id="stopRecord" disabled>Stop</button>
   </p>
   <p>
     <audio id="recordedAudio"></audio>        
   </p>
+		
+<!-- mic end -->
 
-  <script> 
-    navigator.mediaDevices.getUserMedia({audio:true})
-    .then(stream => {handlerFunction(stream)})
-
-    function handlerFunction(stream) {
-      rec = new MediaRecorder(stream);
-      rec.ondataavailable = e => {
-        audioChunks.push(e.data);
-        if (rec.state == "inactive"){
-          let blob = new Blob(audioChunks,{type:'audio/mp3'});
-          recordedAudio.src = URL.createObjectURL(blob);
-          recordedAudio.controls=true;
-          recordedAudio.autoplay=true;
-          sendData(blob)
-          }
-        }
-      }
-    
-    function sendData(data) {}
-      record.onclick = e => {
-        record.disabled = true;
-        record.style.backgroundColor = "blue"
-        stopRecord.disabled=false;
-        audioChunks = [];
-        rec.start();
-        }
-      stopRecord.onclick = e => {
-        record.disabled = false;
-        stop.disabled=true;
-        record.style.backgroundColor = "red"
-        rec.stop();
-        }
-  </script>
+	</div>
+	</div>
   
-  	  <!-- mic end -->
+  	  
   
   </body>
