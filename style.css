@@ -114,36 +114,36 @@ p {
 
 #recorder {
 	margin: auto;
-	align: center;
+	align-content: center;
 
 }
 
 #recordButton{
-	display: inline-block;
+	display: inline;
 	margin: auto;
-	width: 15%;
+	width: 18%;
 	padding-right: 2%;
 	padding-left: 2%;
 }
 
 #record {
-	width: 100%;
+	width: 18%;
 }
 
 #stopRecordButton {
-	display: inline-block;
+	display: inline;
 	margin: auto;
 	width: 15%;
-	padding-right: 2%;
-	padding-left: 2%;
+	padding-right: 1%;
+	padding-left: 1%;
 }
 
 #stopRecord {
-	width: 100%;
+	width: 15%;
 }
 
 #recordedAudio {
-	display: inline-block;
+	display: inline;
 	margin: auto;
 	width: 40%;
 }
