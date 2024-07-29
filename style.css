@@ -124,6 +124,8 @@ p {
 	width: 18%;
 	padding-right: 1%;
 	padding-left: 1%;
+	height: 45px;
+
 }
 
 #record {
@@ -131,6 +133,10 @@ p {
 	font-size: 20px;
 	position: relative;
 	bottom: 20px; 
+	border-radius: 8px;
+	border-width: 0px;
+	height: 45px;
+
 }
 
 #stopRecordButton {
@@ -139,6 +145,8 @@ p {
 	width: 15%;
 	padding-right: 1%;
 	padding-left: 1%;
+	height: 45px;
+
 }
 
 #stopRecord {
@@ -146,6 +154,10 @@ p {
 	font-size: 20px;
 	position: relative;
 	bottom: 20px; 
+	border-radius: 8px;
+	border-width: 0px;
+	height: 45px;
+
 }
 
 #recordedAudio {
