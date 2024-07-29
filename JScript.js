@@ -202,7 +202,7 @@
 		}
 
 		// mic
-/*
+
 navigator.mediaDevices.getUserMedia({audio:true})
     .then(stream => {handlerFunction(stream)})
 
@@ -234,7 +234,6 @@ navigator.mediaDevices.getUserMedia({audio:true})
         record.style.backgroundColor = "red"
         rec.stop();
         }
-*/
 		
 
 		
