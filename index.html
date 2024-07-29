@@ -46,17 +46,20 @@
 	<button id="record-button" onclick="recordVoice()" hidden>Record voice</button>
 	
 	<audio id="playback" controls hidden></audio>
-	
+
+	  <!-- mic? -->
+
+  <audio controls autoplay></audio>
+    		<script type="text/javascript" src="recorder.js"> </script>
+                    <fieldset><legend>RECORD AUDIO</legend>
+    		<input onclick="startRecording()" type="button" value="start recording" />
+    		<input onclick="stopRecording()" type="button" value="stop recording and play" />
+                    </fieldset>
+	  
 	</div>
 
 
 
-	  <!-- mic? -->
-	  
- <p>Volume</p>
-    <input id="volume" type="range" min="0" max="1" step="0.1" value="0.5"/>
-
-    <button onclick="webaudio_tooling_obj()">Listen to mic</button>
 
 
 	  
