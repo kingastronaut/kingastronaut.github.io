@@ -112,6 +112,12 @@ p {
 	background-color: yellow;
 }
 
+#recorder {
+	margin-left: auto;
+	margin-right: auto;
+
+}
+
 // override the above for mobile screens:
 
 @media (max-aspect-ratio: 1/1) {
